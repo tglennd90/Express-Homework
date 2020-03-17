@@ -1,17 +1,22 @@
-// Survey Route //
-// =================================== //
+var path = require("path");
 
-app.get("/survey", function(req, res) {
+module.exports = function(app) {
 
-    res.sendFile(path.join(__dirname, "survey.html"));
+    // Survey Route //
+    // =================================== //
 
-});
+    app.get("/survey", function(req, res) {
 
-// Default Route //
-// =================================== //
+        res.sendFile(path.join(__dirname, "survey.html"));
 
-app.get("/", function(req, res) {
+    });
 
-    res.sendFile(path.join(__dirname, "home.html"));
-    
-});
+    // Default Route //
+    // =================================== //
+
+    app.get("/", function(req, res) {
+
+        res.sendFile(path.join(__dirname, "home.html"));
+        
+    });
+}

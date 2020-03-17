@@ -2,20 +2,24 @@
 // ========================== //
 
 const express = require("express");
-const path = require("path");
 const colors = require("colors");
 
-// Express Steup //
+// Express Setup //
 // ========================== //
 
 const app = express();
-const PORT = 3003;
+const PORT = process.env.PORT || 8080;
 
 // Middleware //
 // ========================== //
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Routers //
+// ========================== //
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 // Server Start //
 // ========================== //

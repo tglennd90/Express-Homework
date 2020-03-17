@@ -28,3 +28,5 @@ const users = [
         "scores":[4, 2, 3, 4, 5, 5, 1, 2, 1, 5]
     }
 ];
+
+module.exports = users;
