@@ -70,8 +70,8 @@
 
             <!-- Question #2 -->
             <div class="form-group">
-                <label for="question1">#2: Generally speaking, you rely more on your experience than your imagination.</label>
-                <select class="form-control" id="question1">
+                <label for="question2">#2: Generally speaking, you rely more on your experience than your imagination.</label>
+                <select class="form-control" id="question2">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -82,8 +82,8 @@
 
             <!-- Question #3 -->
             <div class="form-group">
-                <label for="question1">#3: You find it easy to stay relaxed and focused even when there is some pressure.</label>
-                <select class="form-control" id="question1">
+                <label for="question3">#3: You find it easy to stay relaxed and focused even when there is some pressure.</label>
+                <select class="form-control" id="question3">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -94,8 +94,8 @@
 
             <!-- Question #4 -->
             <div class="form-group">
-                <label for="question1">#4: You rarely do something just out of sheer curiosity.</label>
-                <select class="form-control" id="question1">
+                <label for="question4">#4: You rarely do something just out of sheer curiosity.</label>
+                <select class="form-control" id="question4">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -106,8 +106,8 @@
 
             <!-- Question #5 -->
             <div class="form-group">
-                <label for="question1">#5: People can rarely upset you.</label>
-                <select class="form-control" id="question1">
+                <label for="question5">#5: People can rarely upset you.</label>
+                <select class="form-control" id="question5">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -118,8 +118,8 @@
 
             <!-- Question #6 -->
             <div class="form-group">
-                <label for="question1">#6: It is often difficult for you to relate to other people’s feelings.</label>
-                <select class="form-control" id="question1">
+                <label for="question6">#6: It is often difficult for you to relate to other people’s feelings.</label>
+                <select class="form-control" id="question6">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -130,8 +130,8 @@
 
             <!-- Question #7 -->
             <div class="form-group">
-                <label for="question1">#7: In a discussion, truth should be more important than people’s sensitivities.</label>
-                <select class="form-control" id="question1">
+                <label for="question7">#7: In a discussion, truth should be more important than people’s sensitivities.</label>
+                <select class="form-control" id="question7">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -142,8 +142,8 @@
 
             <!-- Question #8 -->
             <div class="form-group">
-                <label for="question1">#8: You rarely get carried away by fantasies and ideas.</label>
-                <select class="form-control" id="question1">
+                <label for="question8">#8: You rarely get carried away by fantasies and ideas.</label>
+                <select class="form-control" id="question8">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -154,8 +154,8 @@
 
             <!-- Question #9 -->
             <div class="form-group">
-                <label for="question1">#9: You think that everyone’s views should be respected regardless of truth.</label>
-                <select class="form-control" id="question1">
+                <label for="question9">#9: You think that everyone’s views should be respected regardless of truth.</label>
+                <select class="form-control" id="question9">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -166,8 +166,8 @@
 
             <!-- Question #10 -->
             <div class="form-group">
-                <label for="question1">#10: You feel more energetic after spending time with a group of people.</label>
-                <select class="form-control" id="question1">
+                <label for="question10">#10: You feel more energetic after spending time with a group of people.</label>
+                <select class="form-control" id="question10">
                     <option>1 (Strongly Disagree)</option>
                     <option>2</option>
                     <option>3</option>
@@ -177,7 +177,7 @@
             </div>
 
             <hr>
-            <button type="submit" class="btn btn-dark btn-block">Find a Friend!</button>
+            <button type="submit" id="submit" class="btn btn-dark btn-block">Find a Friend!</button>
 
         </form>
 
@@ -186,9 +186,85 @@
 
         <a href="https://github.com/tglennd90/Express-Homework"><button type="button" class="btn btn-dark" style="margin-bottom: 2%;">GitHub Repo</button></a>
 
+        <br><br><br>
+
+        <div class="modal fade" id="resultsModal" role="dialog">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title">Best Match:</h2>
+                    </div>
+
+                    <div class="modal-body">
+                        <h2 id="matchName"></h2>
+                        <img id="matchImg" src="https://via.placeholder.com/300x300" alt="Placeholder IMG">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     <!-- END Main Container END -->
     <!-- ========================= -->
     </div>
+
+    <script type="text/javascript">
+
+        $("#submit").on("click", function() {
+            
+            function validateForm() {
+
+                var isValid = true;
+
+                $(".form-control").each(function () {
+                    if ($(this).val() === "") isValid = false;
+                });
+
+                return isValid;
+            };
+
+            if (validateForm() === true) {
+
+                var userData = {
+                    name: $("#userName").val(),
+                    photo: $("#userUrl").val(),
+                    scores: [
+                        $("question1").val(),
+                        $("question2").val(),
+                        $("question3").val(),
+                        $("question4").val(),
+                        $("question5").val(),
+                        $("question6").val(),
+                        $("question7").val(),
+                        $("question8").val(),
+                        $("question9").val(),
+                        $("question10").val()
+                    ]
+                };
+
+                var currentUrl = window.location.origin;
+
+                $.post(currentUrl + "/apit/users", userData, function(data) {
+                    $("#matchName").text(data.name);
+                    $("#matchImg").attr("src", data.photo);
+                    $("#resultsModal").modal("toggle");
+                })
+
+            } else {
+                alert("Please complete all fields")
+            };
+
+        })
+
+    </script>
 
     <!-- Bootstrap JS/JQ CDN -->
     <!-- ========================= -->
