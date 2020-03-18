@@ -7,7 +7,7 @@ module.exports = function(app) {
 
     app.get("/api/users", function(req, res) {
         
-        return res.json(users);
+        res.json(users);
 
     });
 
