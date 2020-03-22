@@ -25,6 +25,9 @@ require("./app/routing/htmlRoutes")(app);
 // ========================== //
 
 app.listen(PORT, function() {
+    console.log("======================================================".america);
     console.log("");
-    console.log("PORT Portal: ".yellow + "http://localhost:".blue + PORT);
+    console.log("PORT Portal:".bgRed.white + "       " + "http://localhost:".brightGreen + PORT);
+    console.log("");
+    console.log("======================================================".america);
 });
